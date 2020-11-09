@@ -3,38 +3,63 @@
 echo "WELCOME TO FLIP COIN SIMULATOR"
 
 declare -A COUNT
-declare -A COUNT1
-HH=0;
-TT=0;
-HT=0;
-TH=0;
 
+HHH=0;
+HHT=0;
+HTT=0;
+HTH=0;
+THH=0;
+TTH=0;
+TTT=0;
+THT=0;
 for (( i=0; $i<10; i++ ))
 do
 #checking doublet combination HH,TT.TH.HT
 flipCoinCheck=$((RANDOM%2))
 flipCoinCheck1=$((RANDOM%2))
-if [ $flipCoinCheck -eq 1 ] && [ $flipCoinCheck1 -eq 1 ]
+flipCoinCheck2=$((RANDOM%2))
+if [ $flipCoinCheck -eq 1 ] && [ $flipCoinCheck1 -eq 1 ] && [ $flipCoinCheck2 -eq 1 ]
 then
-	echo "HH";
-	COUNT[HH]=$((HH++))
-elif [ $flipCoinCheck -eq 0 ] && [ $flipCoinCheck1 -eq 0 ]
+	echo "HHH";
+	COUNT[HHH]=$((HHH++))
+elif [ $flipCoinCheck -eq 1 ] && [ $flipCoinCheck1 -eq 1 ] && [ $flipCoinCheck2 -eq 0 ]
 then
-	echo "TT";
-	COUNT[TT]=$((TT++))
-elif [ $flipCoinCheck -eq 0 ] && [ $flipCoinCheck1 -eq 1 ]
+	echo "HHT";
+	COUNT[HHT]=$((HHT++))
+elif [ $flipCoinCheck -eq 1 ] && [ $flipCoinCheck1 -eq 0 ] && [ $flipCoinCheck2 -eq 0 ]
 then
-	echo "TH";
-	COUNT[TH]=$((TH++))
+	echo "HTT";
+	COUNT[HTT]=$((HTT++))
+elif [ $flipCoinCheck -eq 0 ] && [ $flipCoinCheck1 -eq 0 ] && [ $flipCoinCheck2 -eq 0 ]
+then
+	echo "TTT";
+	COUNT[TTT]=$((TTT++))
+elif [ $flipCoinCheck -eq 0 ] && [ $flipCoinCheck1 -eq 0 ] && [ $flipCoinCheck2 -eq 1 ]
+then
+        echo "TTH";
+        COUNT[TTH]=$((TTH++))
+elif [ $flipCoinCheck -eq 0 ] && [ $flipCoinCheck1 -eq 1 ] && [ $flipCoinCheck2 -eq 1 ]
+then
+        echo "THH";
+        COUNT[THH]=$((THH++))
+elif [ $flipCoinCheck -eq 0 ] && [ $flipCoinCheck1 -eq 1 ] && [ $flipCoinCheck2 -eq 0 ]
+then
+        echo "THT";
+        COUNT[THT]=$((THT++))
 else
-	echo "HT";
-	COUNT[HT]=$((HT++))
+        echo "HTH";
+        COUNT[HTH]=$((HTH++))
+
 fi
 	
 done
-#calculating doublet combination percentage
-COUNT[doubletHHPercentage]=$(($HH*100/10));
-COUNT[doubletTTPercentage]=$(($TT*100/10));
-COUNT[doubletTHPercentage]=$(($TH*100/10));
-COUNT[doubletHTPercentage]=$(($HT*100/10));
+#calculating triplet combination percentage
+COUNT[tripletHHHPercentage]=$(($HHH*100/10));
+COUNT[tripletHHTPercentage]=$(($HHT*100/10));
+COUNT[triPletHTTPercentage]=$(($HTT*100/10));
+COUNT[tripletTTTPercentage]=$(($TTT*100/10));
+COUNT[tripletTTHPercentage]=$(($TTH*100/10));
+COUNT[tripletTHHPercentage]=$(($THH*100/10));
+COUNT[triPletTHTPercentage]=$(($THT*100/10));
+COUNT[tripletTHTPercentage]=$(($HTH*100/10));
 
